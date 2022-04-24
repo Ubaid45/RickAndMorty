@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Application", "RickAndMorty.Application\RickAndMorty.Application.csproj", "{D036C74B-813C-4AAF-83B4-2C822603491F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Application.Abstraction", "RickAndMorty.Application.Abstraction\RickAndMorty.Application.Abstraction.csproj", "{A4B389C1-B56B-47C0-817F-C0A443F7D076}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.API", "RickAndMorty.API\RickAndMorty.API.csproj", "{937DE09A-CC23-4B15-8201-110ECCDE0EBA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D036C74B-813C-4AAF-83B4-2C822603491F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D036C74B-813C-4AAF-83B4-2C822603491F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D036C74B-813C-4AAF-83B4-2C822603491F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D036C74B-813C-4AAF-83B4-2C822603491F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B389C1-B56B-47C0-817F-C0A443F7D076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B389C1-B56B-47C0-817F-C0A443F7D076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B389C1-B56B-47C0-817F-C0A443F7D076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B389C1-B56B-47C0-817F-C0A443F7D076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937DE09A-CC23-4B15-8201-110ECCDE0EBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937DE09A-CC23-4B15-8201-110ECCDE0EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937DE09A-CC23-4B15-8201-110ECCDE0EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937DE09A-CC23-4B15-8201-110ECCDE0EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
