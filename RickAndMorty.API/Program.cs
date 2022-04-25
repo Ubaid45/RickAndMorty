@@ -1,4 +1,4 @@
-using BettingAgency;
+using RickAndMorty.API;
 
 public class Program
 {
