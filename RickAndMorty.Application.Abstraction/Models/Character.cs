@@ -17,7 +17,7 @@ public class Character
         [JsonPropertyName("type")]
         public string Type { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public CharacterGender gender { get; set; }
+        public string gender { get; set; }
         [JsonPropertyName("origin")]
         public Origin Origin { get; set; }
         [JsonPropertyName("location")]
