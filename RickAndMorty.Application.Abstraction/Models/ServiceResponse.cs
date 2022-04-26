@@ -7,5 +7,5 @@ public class ServiceResponse<T>
     [JsonPropertyName("info")]
     public Info Info { get; set; } 
     [JsonPropertyName("results")]
-    public IList<T> Results { get; set; }
+    public T Results { get; set; }
 }

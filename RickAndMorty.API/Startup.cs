@@ -1,9 +1,12 @@
 using System.Net.Mime;
+using Autofac;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using RickAndMorty.Application.Abstraction.IServices;
 using RickAndMorty.Application.Common;
 using RickAndMorty.Application.Services;
+using RickAndMorty.Net.Api.DI;
 
 namespace RickAndMorty.API;
 
@@ -21,7 +24,7 @@ public class Startup
     {
         services.AddAutoMapper(typeof(AutoMapperProfile));
         
-        services.AddScoped<ICharacterService, CharacterService>();
+        services.AddTransient<IRickAndMortyApi, RickAndMortyApiProxy>();
         
         services.AddHttpClient("apiClient",
             c =>
@@ -31,20 +34,23 @@ public class Startup
             });
         
         services.AddControllers();
-        
-        //convert Enums to Strings (instead of Integer) globally
-        JsonConvert.DefaultSettings = (() =>
-        {
-            var settings = new JsonSerializerSettings();
-            settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-            return settings;
-        });
-        
+
         services.AddEndpointsApiExplorer();
         
         services.AddSwaggerGen();
+
     }
 
+    public void ConfigureContainer(ContainerBuilder builder)
+    {
+        // Add any Autofac modules or registrations.
+        // This is called AFTER ConfigureServices so things you
+        // register here OVERRIDE things registered in ConfigureServices.
+        //
+        // You must have the call to AddAutofac in the Program.Main
+        // method or this won't be called.
+        builder.RegisterModule(new RickAndMortyModule());
+    }
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
     {

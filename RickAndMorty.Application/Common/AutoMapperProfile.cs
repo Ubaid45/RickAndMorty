@@ -1,4 +1,5 @@
 using AutoMapper;
+using AutoMapper.Extensions.EnumMapping;
 using RickAndMorty.Application.Abstraction.Dtos;
 using RickAndMorty.Application.Abstraction.Models;
 
@@ -8,6 +9,7 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<LocationDto, Location>();
+        CreateMap<Location, LocationDto>();
+        //CreateMap<Character, CharacterDto>();
     }
 }
