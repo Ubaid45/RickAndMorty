@@ -1,4 +1,3 @@
-using Autofac.Extensions.DependencyInjection;
 using RickAndMorty.API;
 
 public class Program
@@ -11,7 +10,6 @@ public class Program
     public static IHostBuilder CreateHostBuilder(string[] args)
     {
         return Host.CreateDefaultBuilder(args)
-            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
             .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }

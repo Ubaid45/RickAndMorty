@@ -1,12 +1,8 @@
 using System.Net.Mime;
-using Autofac;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 using RickAndMorty.Application.Abstraction.IServices;
+using RickAndMorty.Application.Abstraction.Models.Episodes;
 using RickAndMorty.Application.Common;
 using RickAndMorty.Application.Services;
-using RickAndMorty.Net.Api.DI;
 
 namespace RickAndMorty.API;
 
@@ -24,7 +20,9 @@ public class Startup
     {
         services.AddAutoMapper(typeof(AutoMapperProfile));
         
-        services.AddTransient<IRickAndMortyApi, RickAndMortyApiProxy>();
+        services.AddTransient<ICharacterService, CharacterService>();
+        services.AddTransient<IEpisodeService, EpisodeService>();
+        services.AddTransient<ILocationService, LocationService>();
         
         services.AddHttpClient("apiClient",
             c =>
@@ -39,17 +37,6 @@ public class Startup
         
         services.AddSwaggerGen();
 
-    }
-
-    public void ConfigureContainer(ContainerBuilder builder)
-    {
-        // Add any Autofac modules or registrations.
-        // This is called AFTER ConfigureServices so things you
-        // register here OVERRIDE things registered in ConfigureServices.
-        //
-        // You must have the call to AddAutofac in the Program.Main
-        // method or this won't be called.
-        builder.RegisterModule(new RickAndMortyModule());
     }
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
