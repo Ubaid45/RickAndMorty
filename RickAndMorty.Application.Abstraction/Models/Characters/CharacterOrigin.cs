@@ -9,10 +9,7 @@ public class CharacterOrigin
         Name = name;
         Url = url;
     }
-    [JsonPropertyName("name")]
 
-    public string Name { get; set; }
-    [JsonPropertyName("url")]
-
-    public Uri Url { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; }
+    [JsonPropertyName("url")] public Uri Url { get; set; }
 }

@@ -5,21 +5,21 @@ using RickAndMorty.Application.Abstraction.Models.Episodes;
 
 namespace RickAndMorty.Application.Services;
 
-public class EpisodeService: BaseService, IEpisodeService
+public class EpisodeService : BaseService, IEpisodeService
 {
     private readonly IMapper _mapper;
 
-    public EpisodeService(IMapper mapper, IHttpClientFactory clientFactory): base(clientFactory)
+    public EpisodeService(IMapper mapper, IHttpClientFactory clientFactory) : base(clientFactory)
     {
         _mapper = mapper;
     }
-    
+
     public Task<ServiceResponse<IEnumerable<Episode>>> GetAllEntities(CancellationToken ct)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ServiceResponse<Episode>> GetASingleEntity(int id, CancellationToken ct)
+    public Task<Episode> GetASingleEntity(int id, CancellationToken ct)
     {
         throw new NotImplementedException();
     }

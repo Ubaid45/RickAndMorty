@@ -5,32 +5,33 @@ using RickAndMorty.Application.Abstraction.Models.Characters;
 
 namespace RickAndMorty.Application.Services;
 
-public class CharacterService: BaseService, ICharacterService
+public class CharacterService : BaseService, ICharacterService
 {
     private readonly IMapper _mapper;
 
-    public CharacterService(IMapper mapper, IHttpClientFactory clientFactory): base(clientFactory)
+    public CharacterService(IMapper mapper, IHttpClientFactory clientFactory) : base(clientFactory)
     {
         _mapper = mapper;
     }
 
 
-    public Task<ServiceResponse<IEnumerable<Character>>> GetAllEntities(CancellationToken ct)
+    public async Task<ServiceResponse<IEnumerable<Character>>?> GetAllEntities(CancellationToken ct)
     {
-        throw new NotImplementedException();
+        return await ProcessRequest<ServiceResponse<IEnumerable<Character>>>("/api/character", ct);
     }
 
-    public Task<ServiceResponse<Character>> GetASingleEntity(int id, CancellationToken ct)
+    public async Task<Character?> GetASingleEntity(int id, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        return await ProcessRequest<Character>($"/api/character{id}", ct);
     }
 
-    public Task<ServiceResponse<IEnumerable<Character>>> GetMultipleEntities(int[] ids, CancellationToken ct)
+    public async Task<ServiceResponse<IEnumerable<Character>>?> GetMultipleEntities(int[] ids, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        return await ProcessRequest<ServiceResponse<IEnumerable<Character>>>($"/api/character/{ids}", ct);
     }
 
-    public Task<ServiceResponse<IEnumerable<Character>>> FilterCharacters(string name, CharacterStatus? characterStatus, string species, string type,
+    public Task<ServiceResponse<IEnumerable<Character>>> FilterCharacters(string name, CharacterStatus? characterStatus,
+        string species, string type,
         CharacterGender? gender, CancellationToken ct)
     {
         throw new NotImplementedException();

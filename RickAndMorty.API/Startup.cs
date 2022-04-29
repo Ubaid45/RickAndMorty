@@ -19,25 +19,25 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddAutoMapper(typeof(AutoMapperProfile));
-        
+
         services.AddTransient<ICharacterService, CharacterService>();
         services.AddTransient<IEpisodeService, EpisodeService>();
         services.AddTransient<ILocationService, LocationService>();
-        
+
         services.AddHttpClient("apiClient",
             c =>
             {
                 c.BaseAddress = new Uri(Configuration["BaseUrl"]);
                 c.DefaultRequestHeaders.Add("Accept", MediaTypeNames.Application.Json);
             });
-        
+
         services.AddControllers();
 
         services.AddEndpointsApiExplorer();
-        
-        services.AddSwaggerGen();
 
+        services.AddSwaggerGen();
     }
+
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
     {
@@ -49,9 +49,9 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
-        
+
         app.UseAuthorization();
-        
+
         app.UseRouting();
 
         if (env.IsDevelopment())
@@ -61,6 +61,4 @@ public class Startup
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
-
-   
 }

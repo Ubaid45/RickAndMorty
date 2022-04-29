@@ -7,16 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Exceptions" />
-      <Folder Include="Middleware" />
+        <Folder Include="Exceptions"/>
+        <Folder Include="Middleware"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RickAndMorty.Application.Abstraction\RickAndMorty.Application.Abstraction.csproj" />
+        <ProjectReference Include="..\RickAndMorty.Application.Abstraction\RickAndMorty.Application.Abstraction.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
     </ItemGroup>
 
 </Project>

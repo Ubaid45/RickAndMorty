@@ -1,6 +1,5 @@
 using System.Text;
-using System.Text.Json;
-using RickAndMorty.Application.Abstraction.Models;
+using Newtonsoft.Json;
 
 namespace RickAndMorty.Application.Services;
 
@@ -13,39 +12,20 @@ public abstract class BaseService
         ClientFactory = clientFactory;
     }
 
-    protected async Task<ServiceResponse<T>?> ProcessRequest<T>(string uri, CancellationToken ct)
-        {
-            try
-            {
-                var request = new HttpRequestMessage(HttpMethod.Get, uri);
+    protected async Task<T?> ProcessRequest<T>(string uri, CancellationToken ct) where T : class
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, uri);
 
-                var client = ClientFactory.CreateClient("apiClient");
+        var client = ClientFactory.CreateClient("apiClient");
 
-                var response = await client.SendAsync(request, ct);
+        var response = await client.SendAsync(request, ct);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseStream = await response.Content.ReadAsStreamAsync(ct);
-                    
-                        StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                        String responseString = reader.ReadToEnd();
-                    
-                    return await JsonSerializer.DeserializeAsync
-                        <ServiceResponse<T>>(responseStream, cancellationToken: ct);
-                }
-                else
-                {
-                    // Error Handling
-                }
+        if (!response.IsSuccessStatusCode) return null;
 
-                return null;
-            }
+        var responseStream = await response.Content.ReadAsStreamAsync(ct);
+        var reader = new StreamReader(responseStream, Encoding.UTF8);
+        var responseString = await reader.ReadToEndAsync();
 
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
-            
-        }
+        return JsonConvert.DeserializeObject<T>(responseString);
+    }
 }

@@ -15,6 +15,4 @@ public class EpisodeController : Controller
         _episodeService = episodeService;
         _logger = logger;
     }
-
-   
 }

@@ -8,21 +8,30 @@ namespace RickAndMorty.API.Controllers;
 public class LocationController : Controller
 {
     private readonly ILocationService _locationService;
+
     private readonly ILogger<LocationController> _logger;
+
     // GET
     public LocationController(ILocationService locationService, ILogger<LocationController> logger)
     {
         _locationService = locationService;
         _logger = logger;
     }
-    
-     
+
+
     [HttpGet]
-    public async Task<IActionResult> GetAllLocations( CancellationToken ct)
+    public async Task<IActionResult> GetAllLocations(CancellationToken ct)
     {
         _logger.LogInformation("Getting all the locations");
-        var characters = await _locationService.GetAllEntities(ct);
-        return Ok(characters);
+        var locations = await _locationService.GetAllEntities(ct);
+        return Ok(locations);
     }
-    
+
+    [HttpGet]
+    public async Task<IActionResult> GetALocation(int id, CancellationToken ct)
+    {
+        _logger.LogInformation("Getting a single location");
+        var location = await _locationService.GetASingleEntity(id, ct);
+        return Ok(location);
+    }
 }

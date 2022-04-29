@@ -6,8 +6,7 @@ public interface IEntity<T>
 {
     Task<ServiceResponse<IEnumerable<T>>> GetAllEntities(CancellationToken ct);
 
-    Task<ServiceResponse<T>> GetASingleEntity(int id, CancellationToken ct);
+    Task<T> GetASingleEntity(int id, CancellationToken ct);
 
     Task<ServiceResponse<IEnumerable<T>>> GetMultipleEntities(int[] ids, CancellationToken ct);
-
 }

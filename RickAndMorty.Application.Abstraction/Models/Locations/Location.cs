@@ -9,8 +9,8 @@ public class Location
         string name = "",
         string type = "",
         string dimension = "",
-        IEnumerable<string> residents = null,
-        string url = null,
+        IEnumerable<Uri> residents = null,
+        Uri url = null,
         DateTime? created = null)
     {
         Id = id;
@@ -21,24 +21,12 @@ public class Location
         Url = url;
         Created = created;
     }
-    [JsonPropertyName("id")]
-    public int Id { get; set; }
-    [JsonPropertyName("name")]
 
-    public string Name { get; set; }
-    [JsonPropertyName("type")]
-
-    public string Type { get; set; }
-    [JsonPropertyName("dimension")]
-
-    public string Dimension { get; set; }
-    [JsonPropertyName("residents")]
-
-    public IEnumerable<string> Residents { get; set; }
-    [JsonPropertyName("url")]
-
-    public string Url { get; set; }
-    [JsonPropertyName("created")]
-
-    public DateTime? Created { get; set; }
+    [JsonPropertyName("id")] public int Id { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; }
+    [JsonPropertyName("type")] public string Type { get; set; }
+    [JsonPropertyName("dimension")] public string Dimension { get; set; }
+    [JsonPropertyName("residents")] public IEnumerable<Uri> Residents { get; set; }
+    [JsonPropertyName("url")] public Uri Url { get; set; }
+    [JsonPropertyName("created")] public DateTime? Created { get; set; }
 }

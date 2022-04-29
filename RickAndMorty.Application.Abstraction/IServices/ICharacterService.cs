@@ -5,7 +5,7 @@ using RickAndMorty.Application.Abstraction.Models.Locations;
 
 namespace RickAndMorty.Application.Abstraction.IServices;
 
-public interface ICharacterService: IEntity<Character>
+public interface ICharacterService : IEntity<Character>
 {
     Task<ServiceResponse<IEnumerable<Character>>> FilterCharacters(string name, CharacterStatus? characterStatus,
         string species, string type,
