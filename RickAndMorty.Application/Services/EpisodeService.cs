@@ -1,36 +1,40 @@
+using System.Net;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using RickAndMorty.Application.Abstraction.Exceptions;
 using RickAndMorty.Application.Abstraction.IServices;
 using RickAndMorty.Application.Abstraction.Models;
 using RickAndMorty.Application.Abstraction.Models.Episodes;
+using RickAndMorty.Application.Common;
 
 namespace RickAndMorty.Application.Services;
 
 public class EpisodeService : BaseService, IEpisodeService
 {
-    private readonly IMapper _mapper;
 
-    public EpisodeService(IMapper mapper, IHttpClientFactory clientFactory) : base(clientFactory)
+    public EpisodeService(IMapper mapper, IHttpClientFactory clientFactory) : base(mapper, clientFactory)
     {
-        _mapper = mapper;
+        
     }
 
-    public Task<ServiceResponse<IEnumerable<Episode>>> GetAllEntities(CancellationToken ct)
+    public async Task<ServiceResponse<IEnumerable<Episode>>> GetAllEntities(CancellationToken ct)
     {
-        throw new NotImplementedException();
+        return await ProcessRequest<ServiceResponse<IEnumerable<Episode>>>("/api/episode", ct);
     }
 
-    public Task<Episode> GetASingleEntity(int id, CancellationToken ct)
+    public async Task<Episode> GetASingleEntity(int id, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        return await ProcessRequest<Episode>($"/api/episode/{id}", ct);
     }
 
-    public Task<ServiceResponse<IEnumerable<Episode>>> GetMultipleEntities(int[] ids, CancellationToken ct)
+    public async Task<IEnumerable<Episode>> GetMultipleEntities(int[] ids, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        return await ProcessRequest<IEnumerable<Episode>>($"/api/episode/{string.Join(",",ids)}", ct);
     }
 
-    public Task<ServiceResponse<IEnumerable<Episode>>> FilterEpisodes(string name, string episode, CancellationToken ct)
+    public async Task<ServiceResponse<IEnumerable<Episode>>> FilterEntities(IQueryCollection queryParams, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        var filteredEpisodes = await ProcessRequest<ServiceResponse<IEnumerable<Episode>>>($"/api/episode/?{StringUtils.BuildQueryString(queryParams)}", ct);
+        return filteredEpisodes ??  throw new HttpStatusException(HttpStatusCode.BadRequest, nameof(ErrorCodes.BadRequestParameters));
     }
 }

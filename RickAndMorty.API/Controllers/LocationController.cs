@@ -28,10 +28,27 @@ public class LocationController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetALocation(int id, CancellationToken ct)
+    public async Task<IActionResult> GetASingleLocation(int id, CancellationToken ct)
     {
         _logger.LogInformation("Getting a single location");
         var location = await _locationService.GetASingleEntity(id, ct);
         return Ok(location);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetMultipleLocations([FromQuery] int[] ids, CancellationToken ct)
+    {
+        _logger.LogInformation("Getting the multiple locations");
+        var locations = await _locationService.GetMultipleEntities(ids, ct);
+        return Ok(locations);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> FilterLocations(CancellationToken ct)
+    {
+        IQueryCollection queryParams = HttpContext.Request.Query;
+        _logger.LogInformation("Filter the locations");
+        var filterLocatins = await _locationService.FilterEntities(queryParams, ct);
+        return Ok(filterLocatins);
     }
 }

@@ -1,17 +1,19 @@
+using System.Net;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using RickAndMorty.Application.Abstraction.Exceptions;
 using RickAndMorty.Application.Abstraction.IServices;
 using RickAndMorty.Application.Abstraction.Models;
 using RickAndMorty.Application.Abstraction.Models.Locations;
+using RickAndMorty.Application.Common;
 
 namespace RickAndMorty.Application.Services;
 
 public class LocationService : BaseService, ILocationService
 {
-    private readonly IMapper _mapper;
 
-    public LocationService(IMapper mapper, IHttpClientFactory clientFactory) : base(clientFactory)
+    public LocationService(IMapper mapper, IHttpClientFactory clientFactory) : base(mapper, clientFactory)
     {
-        _mapper = mapper;
     }
 
     public async Task<ServiceResponse<IEnumerable<Location>>?> GetAllEntities(CancellationToken ct)
@@ -22,17 +24,16 @@ public class LocationService : BaseService, ILocationService
     public async Task<Location> GetASingleEntity(int id, CancellationToken ct)
     {
         return await ProcessRequest<Location?>($"/api/location/{id}", ct);
-        
     }
 
-    public Task<ServiceResponse<IEnumerable<Location>>> GetMultipleEntities(int[] ids, CancellationToken ct)
+    public async Task<IEnumerable<Location>> GetMultipleEntities(int[] ids, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        return await ProcessRequest<IEnumerable<Location>>($"/api/location/{string.Join(",",ids)}", ct);
     }
 
-    public Task<ServiceResponse<IEnumerable<Location>>> FilterLocations(string name, string type, string dimension,
-        CancellationToken ct)
+    public async Task<ServiceResponse<IEnumerable<Location>>> FilterEntities(IQueryCollection queryParams, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        var filteredLocations = await ProcessRequest<ServiceResponse<IEnumerable<Location>>>($"/api/location/?{StringUtils.BuildQueryString(queryParams)}", ct);
+        return filteredLocations ??  throw new HttpStatusException(HttpStatusCode.BadRequest, nameof(ErrorCodes.BadRequestParameters));
     }
 }

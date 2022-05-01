@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using RickAndMorty.Application.Abstraction.IServices;
-using RickAndMorty.Application.Abstraction.Models;
 using RickAndMorty.Application.Abstraction.Models.Characters;
 
 namespace RickAndMorty.API.Controllers;
@@ -27,7 +26,7 @@ public class CharacterController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetASingleCharacters(int id, CancellationToken ct)
+    public async Task<IActionResult> GetASingleCharacter(int id, CancellationToken ct)
     {
         _logger.LogInformation("Getting a single characters");
         var character = await _characterService.GetASingleEntity(id, ct);
@@ -35,21 +34,19 @@ public class CharacterController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetMultipleCharacters(int[] ids, CancellationToken ct)
+    public async Task<IActionResult> GetMultipleCharacters([FromQuery] int[] ids, CancellationToken ct)
     {
         _logger.LogInformation("Getting the multiple characters");
         var multipleCharacters = await _characterService.GetMultipleEntities(ids, ct);
         return Ok(multipleCharacters);
     }
-
+    
     [HttpGet]
-    public async Task<IActionResult> FilterCharacters(string name,
-        CharacterStatus? characterStatus, string species, string type,
-        CharacterGender? gender, CancellationToken ct)
+    public async Task<IActionResult> FilterCharacters(CancellationToken ct)
     {
+        IQueryCollection queryParams = HttpContext.Request.Query;
         _logger.LogInformation("Filter the characters");
-        var filterCharacters =
-            await _characterService.FilterCharacters(name, characterStatus, species, type, gender, ct);
+        var filterCharacters = await _characterService.FilterEntities(queryParams, ct);
         return Ok(filterCharacters);
     }
 }

@@ -7,16 +7,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Exceptions"/>
-        <Folder Include="Middleware"/>
+        <ProjectReference Include="..\RickAndMorty.Application.Abstraction\RickAndMorty.Application.Abstraction.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\RickAndMorty.Application.Abstraction\RickAndMorty.Application.Abstraction.csproj"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+      <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
+        <HintPath>..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\6.0.4\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+      </Reference>
+      <Reference Include="Microsoft.AspNetCore.Http.Features, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
+        <HintPath>..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\6.0.4\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

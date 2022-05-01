@@ -1,7 +1,7 @@
 using System.Net.Mime;
 using RickAndMorty.Application.Abstraction.IServices;
-using RickAndMorty.Application.Abstraction.Models.Episodes;
 using RickAndMorty.Application.Common;
+using RickAndMorty.Application.Middleware;
 using RickAndMorty.Application.Services;
 
 namespace RickAndMorty.API;
@@ -30,7 +30,7 @@ public class Startup
                 c.BaseAddress = new Uri(Configuration["BaseUrl"]);
                 c.DefaultRequestHeaders.Add("Accept", MediaTypeNames.Application.Json);
             });
-
+        
         services.AddControllers();
 
         services.AddEndpointsApiExplorer();
@@ -50,14 +50,12 @@ public class Startup
 
         app.UseHttpsRedirection();
 
+        app.UseRouting();
+        
+        app.UseMiddleware<ExceptionMiddleware>();
+        app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseRouting();
-
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
