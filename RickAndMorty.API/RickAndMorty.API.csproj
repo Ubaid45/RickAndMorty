@@ -8,14 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.4"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\RickAndMorty.Application.Abstraction\RickAndMorty.Application.Abstraction.csproj"/>
-        <ProjectReference Include="..\RickAndMorty.Application\RickAndMorty.Application.csproj"/>
+        <ProjectReference Include="..\RickAndMorty.Application.Abstraction\RickAndMorty.Application.Abstraction.csproj" />
+        <ProjectReference Include="..\RickAndMorty.Application\RickAndMorty.Application.csproj" />
+        <ProjectReference Include="..\RickAndMorty.Data\RickAndMorty.Data.csproj" />
     </ItemGroup>
 
 </Project>

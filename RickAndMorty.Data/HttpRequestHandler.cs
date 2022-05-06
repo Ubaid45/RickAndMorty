@@ -1,24 +1,23 @@
-using System.Text;
-using AutoMapper;
+﻿using System.Text;
 using Newtonsoft.Json;
+using RickAndMorty.Data.Abstraction;
 
-namespace RickAndMorty.Application.Services;
+namespace RickAndMorty.Data;
 
-public class BaseService
+public class HttpRequestHandler: IHttpRequestHandler
 {
-    protected readonly IMapper Mapper;
-    protected readonly IHttpClientFactory ClientFactory;
-    protected BaseService(IMapper mapper, IHttpClientFactory clientFactory)
+    private readonly IHttpClientFactory _clientFactory;
+    
+    public HttpRequestHandler(IHttpClientFactory clientFactory)
     {
-        Mapper = mapper;
-        ClientFactory = clientFactory;
+        _clientFactory = clientFactory;
     }
     
-    protected  async Task<T?> ProcessRequest<T>( string uri, CancellationToken ct) where T : class
+    public async Task<T?> ProcessRequest<T>( string uri, CancellationToken ct) where T : class
     {
         var request = new HttpRequestMessage(HttpMethod.Get, uri);
 
-        var client = ClientFactory.CreateClient("apiClient");
+        var client = _clientFactory.CreateClient("apiClient");
 
         var response = await client.SendAsync(request, ct);
 
@@ -30,4 +29,5 @@ public class BaseService
 
         return JsonConvert.DeserializeObject<T>(responseString);
     }
+
 }

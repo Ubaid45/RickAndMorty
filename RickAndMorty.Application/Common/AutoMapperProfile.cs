@@ -1,15 +1,20 @@
 using AutoMapper;
-using RickAndMorty.Application.Abstraction.Dtos;
-using RickAndMorty.Application.Abstraction.Models;
-using RickAndMorty.Application.Abstraction.Models.Locations;
+using EnumsNET;
+using RickAndMorty.Application.Abstraction.Models.Characters;
+using RickAndMorty.Application.Extensions;
 
-namespace RickAndMorty.Application.Common;
-
-public class AutoMapperProfile : Profile
+namespace RickAndMorty.Application.Common
 {
-    public AutoMapperProfile()
+    // TODO
+    public class AutoMapperProfile: Profile
     {
-        CreateMap<Location, LocationDto>();
-        //CreateMap<Character, CharacterDto>();
+        public AutoMapperProfile()
+        {
+            CreateMap<Character, CharacterDto>()
+                .ForMember(i => i.GenderDescription,
+                    o => o.MapFrom(s => ((CharacterGender) s.Gender).AsString(EnumFormat.Description)))
+                .ForMember(i => i.StatusDescription,
+                    o => o.MapFrom(s => ((CharacterStatus) s.Status).AsString(EnumFormat.Description)));
+        }
     }
 }

@@ -8,9 +8,11 @@
 
     <ItemGroup>
         <ProjectReference Include="..\RickAndMorty.Application.Abstraction\RickAndMorty.Application.Abstraction.csproj" />
+        <ProjectReference Include="..\RickAndMorty.Data.Abstraction\RickAndMorty.Data.Abstraction.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Enums.NET" Version="4.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 

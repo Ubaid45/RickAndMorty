@@ -34,7 +34,7 @@ public class CharacterController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetMultipleCharacters([FromQuery] int[] ids, CancellationToken ct)
+    public async Task<IActionResult> GetMultipleCharacters([FromQuery] int[]? ids, CancellationToken ct)
     {
         _logger.LogInformation("Getting the multiple characters");
         var multipleCharacters = await _characterService.GetMultipleEntities(ids, ct);

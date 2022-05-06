@@ -3,6 +3,8 @@ using RickAndMorty.Application.Abstraction.IServices;
 using RickAndMorty.Application.Common;
 using RickAndMorty.Application.Middleware;
 using RickAndMorty.Application.Services;
+using RickAndMorty.Data;
+using RickAndMorty.Data.Abstraction;
 
 namespace RickAndMorty.API;
 
@@ -18,12 +20,13 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddAutoMapper(typeof(AutoMapperProfile));
-
         services.AddTransient<ICharacterService, CharacterService>();
         services.AddTransient<IEpisodeService, EpisodeService>();
         services.AddTransient<ILocationService, LocationService>();
+        services.AddTransient<IHttpRequestHandler, HttpRequestHandler>();
 
+        services.AddAutoMapper(typeof(AutoMapperProfile));
+        
         services.AddHttpClient("apiClient",
             c =>
             {

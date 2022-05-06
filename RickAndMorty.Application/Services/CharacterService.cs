@@ -6,35 +6,51 @@ using RickAndMorty.Application.Abstraction.IServices;
 using RickAndMorty.Application.Abstraction.Models;
 using RickAndMorty.Application.Abstraction.Models.Characters;
 using RickAndMorty.Application.Common;
+using RickAndMorty.Data.Abstraction;
 
 namespace RickAndMorty.Application.Services;
 
-public class CharacterService : BaseService, ICharacterService
+public class CharacterService : ICharacterService
 {
-
-    public CharacterService(IMapper mapper, IHttpClientFactory clientFactory) : base(mapper, clientFactory)
+    private readonly IHttpRequestHandler _httpRequestHandler;
+    private readonly IMapper _mapper;
+    public CharacterService(IHttpRequestHandler httpRequestHandler, IMapper mapper)
     {
+        _httpRequestHandler = httpRequestHandler;
+        _mapper = mapper;
     }
 
 
-    public async Task<ServiceResponse<IEnumerable<Character>>?> GetAllEntities(CancellationToken ct)
+    public async Task<ServiceResponse<List<Character?>>> GetAllEntities(CancellationToken ct)
     {
-        return await ProcessRequest<ServiceResponse<IEnumerable<Character>>>("/api/character", ct);
+        var allCharacters = await _httpRequestHandler.ProcessRequest<ServiceResponse<List<Character?>>>("/api/character", ct);
+        return allCharacters ?? throw new HttpStatusException(HttpStatusCode.BadRequest, nameof(ErrorCodes.BadRequestParameters));
     }
 
     public async Task<Character?> GetASingleEntity(int id, CancellationToken ct)
     {
-        return await ProcessRequest<Character>($"/api/character/{id}", ct);
+        var character =  await _httpRequestHandler.ProcessRequest<Character>($"/api/character/{id}", ct);
+        return character ?? throw new HttpStatusException(HttpStatusCode.BadRequest, nameof(ErrorCodes.BadRequestParameters));
     }
 
-    public async Task<IEnumerable<Character>?> GetMultipleEntities(int[] ids, CancellationToken ct)
+    public async Task<List<Character?>> GetMultipleEntities(int[]? ids, CancellationToken ct)
     {
-        return await ProcessRequest<IEnumerable<Character>>($"/api/character/{string.Join(",",ids)}", ct);
+        var url = string.Empty;
+        if (ids != null) url = $"/api/character/{string.Join(",", ids)}";
+        
+        var multipleCharacters = await _httpRequestHandler.ProcessRequest<List<Character?>>(url, ct);
+        return multipleCharacters ??  throw new HttpStatusException(HttpStatusCode.BadRequest, nameof(ErrorCodes.BadRequestParameters));
     }
 
-    public async Task<ServiceResponse<IEnumerable<Character>>> FilterEntities(IQueryCollection queryParams, CancellationToken ct)
+    public async Task<ServiceResponse<List<Character?>>> FilterEntities(IQueryCollection? queryParams,
+        CancellationToken ct)
     {
-        var filteredCharacters = await ProcessRequest<ServiceResponse<IEnumerable<Character>>>($"/api/character/?{StringUtils.BuildQueryString(queryParams)}", ct);
-        return filteredCharacters ??  throw new HttpStatusException(HttpStatusCode.BadRequest, nameof(ErrorCodes.BadRequestParameters));
+        var url = string.Empty;
+        if (queryParams != null) url = $"/api/character/?{StringUtils.BuildQueryString(queryParams)}";
+        
+        var filteredCharacters = await _httpRequestHandler.ProcessRequest<ServiceResponse<List<Character?>>>(
+                url , ct);
+        return filteredCharacters ?? throw new HttpStatusException(HttpStatusCode.BadRequest, nameof(ErrorCodes.BadRequestParameters));
+
     }
 }

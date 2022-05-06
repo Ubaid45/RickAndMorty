@@ -36,7 +36,7 @@ public class LocationController : Controller
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetMultipleLocations([FromQuery] int[] ids, CancellationToken ct)
+    public async Task<IActionResult> GetMultipleLocations([FromQuery] int[]? ids, CancellationToken ct)
     {
         _logger.LogInformation("Getting the multiple locations");
         var locations = await _locationService.GetMultipleEntities(ids, ct);

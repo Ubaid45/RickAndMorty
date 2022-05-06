@@ -6,6 +6,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Application.Ab
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.API", "RickAndMorty.API\RickAndMorty.API.csproj", "{937DE09A-CC23-4B15-8201-110ECCDE0EBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.API.Tests", "RickAndMorty.API.Tests\RickAndMorty.API.Tests.csproj", "{E4688583-34C0-45B1-BBDD-7148920E1D43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Data", "RickAndMorty.Data\RickAndMorty.Data.csproj", "{546884C0-9456-4DD4-BB17-4608C5E76D5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Data.Abstraction", "RickAndMorty.Data.Abstraction\RickAndMorty.Data.Abstraction.csproj", "{C2A7FE82-9EDA-4F0F-916A-F92DA63F8DA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +30,17 @@ Global
 		{937DE09A-CC23-4B15-8201-110ECCDE0EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{937DE09A-CC23-4B15-8201-110ECCDE0EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{937DE09A-CC23-4B15-8201-110ECCDE0EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4688583-34C0-45B1-BBDD-7148920E1D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4688583-34C0-45B1-BBDD-7148920E1D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4688583-34C0-45B1-BBDD-7148920E1D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4688583-34C0-45B1-BBDD-7148920E1D43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{546884C0-9456-4DD4-BB17-4608C5E76D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{546884C0-9456-4DD4-BB17-4608C5E76D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{546884C0-9456-4DD4-BB17-4608C5E76D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{546884C0-9456-4DD4-BB17-4608C5E76D5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2A7FE82-9EDA-4F0F-916A-F92DA63F8DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2A7FE82-9EDA-4F0F-916A-F92DA63F8DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2A7FE82-9EDA-4F0F-916A-F92DA63F8DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2A7FE82-9EDA-4F0F-916A-F92DA63F8DA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

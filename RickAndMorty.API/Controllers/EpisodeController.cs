@@ -33,7 +33,7 @@ public class EpisodeController : Controller
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetMultipleEpisodes([FromQuery] int[] ids, CancellationToken ct)
+    public async Task<IActionResult> GetMultipleEpisodes([FromQuery] int[]? ids, CancellationToken ct)
     {
         _logger.LogInformation("Getting the multiple episodes");
         var multipleEpisodes = await _episodeService.GetMultipleEntities(ids, ct);
