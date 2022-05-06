@@ -10,6 +10,7 @@ pool:
 steps:
 - script: |
     sudo snap install --classic heroku
+    curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
   displayName: 'i heroku cli'
 - script: |
     echo CONTAINER LOGIN
